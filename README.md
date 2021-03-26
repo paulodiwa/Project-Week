@@ -36,7 +36,7 @@ The machines on the internal network are not exposed to the public Internet.
 
 Only the Jump-Box-Provisioner machine can accept connections from the Internet. 
 Access to this machine is only allowed from the following IP addresses:
-- 72.220.255.160 (Please Change this)
+- My Home IP
 
 Machines within the network can only be accessed by docker continer within Jump-Box-Provisioner.
 It's IP Address is 10.1.0.4 and in my build is inside the container named "sharp_borg". Your's should be names something similar.
@@ -46,7 +46,7 @@ A summary of the access policies in place can be found in the table below.
 | Name                 | Publicly Accessible | Allowed IP Addresses |
 |----------------------|---------------------|----------------------|
 | ELK-VM               | No                  | 10.1.0.4             |
-| Jump-Box-Provisioner | Yes                 | 72.220.255.160       |
+| Jump-Box-Provisioner | Yes                 | Home IP              |
 | Web-1                | No                  | 10.1.0.4             |
 | Web-2                | No                  | 10.1.0.4             |
 | Web-3                | No                  | 10.1.0.4             |

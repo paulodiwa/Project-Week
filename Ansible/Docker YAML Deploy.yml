@@ -1,0 +1,33 @@
+---
+- name: configure web VM with docker
+  hosts: webservers
+  beome: true
+  tasks:
+  
+    - name: uninstall apache2
+      apt:
+        name: apache2
+        state: absent
+
+    - name: install docker.io
+      apt:
+        name: docker.io
+        state: present
+
+    - name: install python3
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: install docker
+      pip:
+        name: docker
+        state: present
+
+    - name: Installing DVWA Docker Container
+      docker_container:
+        name: dvwa
+        image: cyberxsecurity/dvwa
+        state: started
+        published_ports: 80:80
+        restart_policy: always

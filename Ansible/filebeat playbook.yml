@@ -1,0 +1,33 @@
+---
+- name: Filebeat Installation Play
+  hosts: webservers
+  become: true
+  tasks:
+
+    - name: Downloading elastic artifacts.io (DEB)
+      get_url:
+        url: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.4.0-amd64.deb
+        dest: ./
+      
+    - name: Installing elestic artifacts.io (INST)
+      apt:
+        deb: ./filebeat-7.4.0-amd64.deb
+      
+    - name: Copying Filbeat Configurations From Container
+      ansible.builtin.copy: 
+        src: /etc/ansible/filebeat-config.yml 
+        dest: /etc/filebeat/filebeat.yml
+      
+    - name: Running enabling filebeat modules
+      command: filebeat modules enable system
+      
+    - name: Running filebeat setup 
+      command: filebeat setup
+      
+    - name: Running service filebeat start
+      command: service filebeat start
+      
+    - name: Enable filebeat on service boot
+      systemd: 
+        name: filebeat
+        enabled: yes
